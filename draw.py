@@ -2,15 +2,10 @@ import csv
 import shapefile
 import pandas as pd
 import geopandas as gpd
+import matplotlib.pyplot as plt
 
-
-from shapely.geometry import Point
-from geopandas import GeoDataFrame
-#import pandas as pd
 FILE_HEADER = [ 'x', 'y']
 USE_COLS = [ 'x', 'y']
-
-# Create a polygon shapefile writer
 w = shapefile.Writer('LBY_adm0.shp',shapeType=5)
 w.autoBalance = 1
 w.field("longitude", "C", "40")
@@ -27,8 +22,7 @@ for c in coords:
     z = str(c).replace('(','').replace(')','')
     a,x,y = z.split(" ")
     part.append([float(x),float(y)])
-    # create a polygon record with the list of coordinates.
+
 w.poly([part])
-#w.save("polys.shp")
 w.close()
 
